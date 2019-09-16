@@ -1,10 +1,15 @@
 package com.ggp.wsbills.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Bill {
@@ -21,6 +26,12 @@ public class Bill {
 
     private Date confirmationDate;
 
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    @JoinColumn(name = "bill_id")
+    private List<BillItem> items;
 
     public Long getId() {
         return id;
@@ -60,5 +71,17 @@ public class Bill {
 
     public void setConfirmationDate(Date confirmationDate) {
         this.confirmationDate = confirmationDate;
+    }
+
+    public List<BillItem> getItems() {
+        try {
+            return items;
+        } catch (Exception ex) {
+           return new ArrayList<>();
+        }
+    }
+
+    public void setItems(List<BillItem> items) {
+        this.items = items;
     }
 }

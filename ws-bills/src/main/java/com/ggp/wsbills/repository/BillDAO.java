@@ -17,7 +17,19 @@ public class BillDAO {
     public List<Bill> findAllBills() {
         Query q = em.createQuery("select b from Bill b");
         List<Bill> bills = q.getResultList();
+        fetch(bills);
         return bills;
+    }
+
+    /**
+     * fetch list of bill items
+     *
+     * @param bills list of bills
+     */
+    private void fetch(List<Bill> bills) {
+        for (Bill bill : bills) {
+            bill.getItems().size();
+        }
     }
 
 }
