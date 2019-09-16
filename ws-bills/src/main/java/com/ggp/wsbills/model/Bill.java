@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,8 @@ import java.util.List;
 public class Bill {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
     private Long id;
 
     private String userHash;
@@ -30,7 +32,7 @@ public class Bill {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-    @JoinColumn(name = "bill_id")
+    @JoinColumn(name = "bill_id", nullable=false)
     private List<BillItem> items;
 
     public Long getId() {

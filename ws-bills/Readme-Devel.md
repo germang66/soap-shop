@@ -64,9 +64,13 @@ set "JAVA_OPTS=%JAVA_OPTS% -XX:PermSize=64M -XX:MaxPermSize=128M"
 
 ### SOAP Request (with Postman)
 
-* POST  `http://localhost:8080/ws-bills/WsBillsService?wsdl`
+* parameters (all request)
+    * POST  `http://localhost:8080/ws-bills/WsBillsService?wsdl`
     * raw -- Text (text/plain)
     * body
+
+* list all the bills 
+   
 ```
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hs="http://www.wsbills.com">
  <soapenv:Body>
@@ -77,6 +81,64 @@ set "JAVA_OPTS=%JAVA_OPTS% -XX:PermSize=64M -XX:MaxPermSize=128M"
 ```
 
 
+* save bill
 
+```
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hs="http://www.wsbills.com">
+ <soapenv:Body>
+     <hs:saveBill>
+        <arg0>
+		    <items>
+		        <amount>14</amount>
+		        <price>5500.0</price>
+		        <productHash>product123</productHash>
+		    </items>
+		    <items>
+		        <amount>15</amount>
+		        <price>10500.0</price>
+		        <productHash>product456</productHash>
+		    </items>
+		    <items>
+		        <amount>17</amount>
+		        <price>2400.0</price>
+		        <productHash>product789</productHash>
+		    </items>
+		    <paymentMethod>myMethod1234</paymentMethod>
+		    <userHash>user333</userHash>
+	    </arg0>
+	</hs:saveBill>
+ </soapenv:Body>
+</soapenv:Envelope>
+```
+
+* list bills of user 
+    * is used the userHash
+
+```
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hs="http://www.wsbills.com">
+ <soapenv:Body>
+     <hs:findBillsByUserHash>
+        <arg0>user333</arg0>
+	 </hs:findBillsByUserHash>
+ </soapenv:Body>
+</soapenv:Envelope>
+```
+
+* update bill
+    * require id for update bill
+    * just can update confirmation date.
+
+```
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hs="http://www.wsbills.com">
+ <soapenv:Body>
+     <hs:updateBill>
+        <arg0>
+		    <id>3</id>
+		    <confirmationDate>2022-10-10T19:02:48-03:00</confirmationDate>
+	    </arg0>
+	</hs:updateBill>
+ </soapenv:Body>
+</soapenv:Envelope>
+```
 
 

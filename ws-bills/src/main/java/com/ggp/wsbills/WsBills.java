@@ -14,4 +14,13 @@ public interface WsBills {
     @WebMethod
     List<Bill> findAllBills();
 
+    @WebMethod
+    List<Bill> findBillsByUserHash(String userHash);
+
+    @WebMethod
+    void saveBill(Bill newBill);
+
+    @WebMethod
+    void updateBill(Bill updatedBill);
+
 }
