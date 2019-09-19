@@ -5,16 +5,14 @@ Description
 * Endpoint
     * Create user
     * Update user
-    * Get user info
-    * Login user
+    * Get user info by user email
 
 Stack
 ========
 
 * JDK1.7
-* Spring MVC 4 (SOAP Web Service)
-* JAVA EE7
-    * JAAS (Authentication and Authorization)
+* Spring MVC 4 & mybatis
+    * Spring WS 2.3 (SOAP Web Service)
     * mybatis3 (Persistance)
 * Oracle Database 12c EE 12.2.0.1.0 64bit
 * WildFly9

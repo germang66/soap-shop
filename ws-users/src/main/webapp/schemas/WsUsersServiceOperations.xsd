@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.wsusers.com"
+            targetNamespace="http://www.wsusers.com" elementFormDefault="qualified">
+    <xsd:element name="SayHelloRequest">
+    </xsd:element>
+</xsd:schema>
