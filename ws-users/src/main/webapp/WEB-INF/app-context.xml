@@ -11,27 +11,28 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <context:component-scan base-package="com.ggp.wsusers.service"/>
+    <context:component-scan base-package="com.ggp.wsusers.endpoint"/>
     <sws:annotation-driven/>
 
     <!--Service Bean-->
     <bean id="WsUsersService" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition" lazy-init="true">
 
 
-      <property name="schemaCollection">
-       <bean class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
-         <property name="inline" value="true" />
-         <property name="xsds">
-           <list>
-             <value>schemas/WsUsersServiceOperations.xsd</value>
-           </list>
-         </property>
-       </bean>
-      </property>
+        <property name="schemaCollection">
+            <bean class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
+                <property name="inline" value="true"/>
+                <property name="xsds">
+                    <list>
+                        <value>schemas/WsUsersServiceOperations.xsd</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
 
-      <property name="portTypeName" value="WsUsersService"/>
-      <property name="serviceName" value="WsUsersServices" />
-      <property name="locationUri" value="/endpoints"/>
-   </bean>
+        <property name="portTypeName" value="WsUsersService"/>
+        <property name="serviceName" value="WsUsersServices"/>
+        <property name="locationUri" value="/endpoints"/>
+        <property name="targetNamespace" value="http://webservices.wsusers.ggp.com"/>
+    </bean>
 
 </beans>

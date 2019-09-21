@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.wsusers.com"
-            targetNamespace="http://www.wsusers.com" elementFormDefault="qualified">
-    <xsd:element name="SayHelloRequest">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://webservices.wsusers.ggp.com"
+            targetNamespace="http://webservices.wsusers.ggp.com"
+            xmlns:user="http://webservices.wsusers.ggp.com"
+            elementFormDefault="qualified">
+    <xsd:import namespace="http://webservices.wsusers.ggp.com" schemaLocation="UserDetail.xsd"/>
+    <!--get user by email-->
+    <xsd:element name="GetUserByEmailRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="email" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
     </xsd:element>
+    <xsd:element name="GetUserByEmailResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="user" type="user:UserDetail"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!--create user-->
+    <xsd:element name="SaveUserRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="user" type="user:UserDetail"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="SaveUserResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="user" type="user:UserDetail"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!--update user-->
+    <xsd:element name="UpdateUserRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="user" type="user:UserDetail"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="UpdateUserResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="user" type="user:UserDetail"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
 </xsd:schema>

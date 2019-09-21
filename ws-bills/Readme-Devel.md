@@ -62,6 +62,11 @@ set "JAVA_OPTS=%JAVA_OPTS% -XX:+CMSPermGenSweepingEnabled -XX:+CMSClassUnloading
 set "JAVA_OPTS=%JAVA_OPTS% -XX:PermSize=64M -XX:MaxPermSize=128M"
 ```
 
+### About WSDL Generation
+
+* wsdl is generated in base of the annotation `@WebMethod` and `@WebService`
+
+
 ### SOAP Request (with Postman)
 
 * parameters (all request)

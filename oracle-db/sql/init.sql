@@ -126,6 +126,7 @@ CREATE TABLE users_ws.appuser
   address VARCHAR2(255) NULL, 
   phone VARCHAR2(255) NULL, 
   email VARCHAR2(255) NOT NULL, 
+  roles VARCHAR2(255) NOT NULL,
   PRIMARY KEY (id)
 );
 CREATE INDEX users_ws.user_userhash_idx ON users_ws.appuser (userhash);
@@ -135,10 +136,16 @@ CREATE INDEX users_ws.user_firstname_idx ON users_ws.appuser (firstname);
 CREATE INDEX users_ws.user_lastname_idx ON users_ws.appuser (lastname);
 CREATE INDEX users_ws.user_password_idx ON users_ws.appuser (password);
 CREATE INDEX users_ws.user_email_idx ON users_ws.appuser (email);
+CREATE INDEX users_ws.user_roles_idx ON users_ws.appuser (roles);
+
 
 --required to insert values in table
 GRANT UNLIMITED TABLESPACE TO users_ws;
 
-INSERT INTO users_ws.appuser (userhash, firstname, lastname, password, email)
+INSERT INTO users_ws.appuser (userhash, firstname, lastname, password, email, roles)
 VALUES
-('user111', 'myFirstname', 'myLastname', 'pass123', 'myEmail@test.com');
+('user111', 'myFirstname', 'myLastname', 'pass123', 'myEmail@test.com', 'CLIENT,ADMIN');
+
+INSERT INTO users_ws.appuser (userhash, firstname, lastname, password, email, roles)
+VALUES
+('user111', 'aaaaName', 'aaaLastname', 'aaaa1111', 'aa@a.com', 'CLIENT');
