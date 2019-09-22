@@ -16,8 +16,6 @@
 
     <!--Service Bean-->
     <bean id="WsUsersService" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition" lazy-init="true">
-
-
         <property name="schemaCollection">
             <bean class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
                 <property name="inline" value="true"/>
@@ -28,11 +26,27 @@
                 </property>
             </bean>
         </property>
-
         <property name="portTypeName" value="WsUsersService"/>
         <property name="serviceName" value="WsUsersServices"/>
         <property name="locationUri" value="/endpoints"/>
         <property name="targetNamespace" value="http://webservices.wsusers.ggp.com"/>
+    </bean>
+
+    <!--datasource-->
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:/oracleUsers"/>
+    </bean>
+
+    <!-- define the SqlSessionFactory, notice that configLocation is not needed when you use MapperFactoryBean -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="WEB-INF/sqlmap-config.xml" />
+        <property name="mapperLocations" value="WEB-INF/mappers/*.xml"/>
+    </bean>
+
+    <!-- scan for mappers and let them be autowired -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ggp.wsusers.mapper" />
     </bean>
 
 </beans>

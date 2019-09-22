@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ggp.wsusers.mapper.UserMapper">
+
+
+    <resultMap id="result" type="user">
+        <result property="id" column="id"/>
+        <result property="userhash" column="userhash"/>
+        <result property="creationDate" column="creationdate"/>
+        <result property="modificationDate" column="modificationdate"/>
+        <result property="firstname" column="firstname"/>
+        <result property="lastname" column="lastname"/>
+        <result property="password" column="password"/>
+        <result property="address" column="address"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="roles" column="roles"/>
+    </resultMap>
+
+    <select id="findByEmail" resultMap="result" parameterType="string">
+        SELECT
+               id, userhash, creationdate, modificationdate,
+               firstname, lastname, password, address, phone,
+               email, roles
+        FROM appuser WHERE email = #{email}
+    </select>
+
+</mapper>
