@@ -19,6 +19,7 @@
         <result property="roles" column="roles"/>
     </resultMap>
 
+    <!--find user by email-->
     <select id="findByEmail" resultMap="result" parameterType="string">
         SELECT
                id, userhash, creationdate, modificationdate,
@@ -26,5 +27,22 @@
                email, roles
         FROM appuser WHERE email = #{email}
     </select>
+
+
+    <!--save user-->
+    <insert id="save" parameterType="user" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO appuser (userhash, creationdate, modificationdate,
+                              firstname, lastname, password, address, phone,
+                              email, roles)
+        VALUES (#{userhash}, #{creationDate}, #{modificationDate},
+                  #{firstname}, #{lastname}, #{password}, #{address}, #{phone},
+                  #{email}, #{roles} )
+
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            select ID_SEQ.nextval as id FROM dual
+        </selectKey>
+    </insert>
+
+    <!--update user-->
 
 </mapper>

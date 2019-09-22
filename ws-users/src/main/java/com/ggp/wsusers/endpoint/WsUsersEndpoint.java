@@ -16,6 +16,8 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import java.util.Date;
+
 @Endpoint
 public class WsUsersEndpoint {
 
@@ -32,12 +34,12 @@ public class WsUsersEndpoint {
     public
     @ResponsePayload
     GetUserByEmailResponse GetUserByEmail(@RequestPayload GetUserByEmailRequest request) {
+        System.out.println("Get User");//TODO: replace with logger
         GetUserByEmailResponse response = new GetUserByEmailResponse();
         if  (request == null || request.getEmail() == null) {
             System.out.println("ERROR in method parameter"); //TODO: throw exception
             return response;
         }
-        System.out.println("Get User");//TODO: replace with logger
         User user = userMapper.findByEmail(request.getEmail());
         if (user == null) {
             System.out.println("ERROR NOT FOUND USER"); //TODO: throw exception
@@ -53,9 +55,25 @@ public class WsUsersEndpoint {
     SaveUserResponse SaveUser(@RequestPayload SaveUserRequest request) {
         System.out.println("Save user!");
         SaveUserResponse response = new SaveUserResponse();
-        UserDetail savedUser = new UserDetail();
-        savedUser.setEmail(request.getUser().getEmail());
-        response.setUser(savedUser);
+        //TODO: improve required fields validation
+        if  (request == null || request.getUser() == null ||
+                request.getUser().getEmail() == null || request.getUser().getPassword() == null ||
+                request.getUser().getFirstname() == null || request.getUser().getLastname() == null) {
+            System.out.println("ERROR in method parameter"); //TODO: throw exception
+            return response;
+        }
+        User dbUser = userMapper.findByEmail(request.getUser().getEmail());
+        if (dbUser != null) {
+            System.out.println("User already Exists"); //TODO: throw exception
+            return response;
+        }
+        User user = Utils.converTo(request.getUser());
+        user.setCreationDate(new Date());
+        user.setModificationDate(new Date());
+        user.setUserhash(Utils.generateHash());
+        userMapper.save(user);
+        dbUser = userMapper.findByEmail(user.getEmail());
+        response.setUser(Utils.convertTo(dbUser));
         return response;
     }
 

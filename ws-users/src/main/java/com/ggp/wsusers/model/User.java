@@ -1,11 +1,11 @@
 package com.ggp.wsusers.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class User {
 
-    private Long id;
+    private Integer id;
+    //TODO: improve: use userhash as primary id
     private String userhash;
     private Date creationDate;
     private Date modificationDate;
@@ -17,11 +17,11 @@ public class User {
     private String email;
     private String roles;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

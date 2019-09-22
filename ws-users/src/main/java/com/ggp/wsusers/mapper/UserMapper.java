@@ -6,9 +6,9 @@ public interface UserMapper {
 
     User findByEmail(String email);
 
-    User save(User user);
+    void save(User user);
 
-    User update(User user);
+    void update(User user);
 
 
 }
