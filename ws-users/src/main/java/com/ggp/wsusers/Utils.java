@@ -1,6 +1,8 @@
 package com.ggp.wsusers;
 
+import com.ggp.wsusers.exception.InvalidParameterException;
 import com.ggp.wsusers.model.User;
+import com.ggp.wsusers.webservices.SaveUserRequest;
 import com.ggp.wsusers.webservices.UserDetail;
 
 import java.text.DateFormat;
@@ -70,4 +72,8 @@ public class Utils {
         return buffer.toString();
     }
 
+    public static void notNullField(Object obj, String field) throws InvalidParameterException {
+        if (obj == null)
+            throw new InvalidParameterException(field + ": is null");
+    }
 }

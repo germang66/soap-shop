@@ -28,6 +28,14 @@
         FROM appuser WHERE email = #{email}
     </select>
 
+    <!--find user by userhash-->
+    <select id="findByUserhash" resultMap="result" parameterType="string">
+        SELECT
+            id, userhash, creationdate, modificationdate,
+            firstname, lastname, password, address, phone,
+            email, roles
+        FROM appuser WHERE userhash = #{userhash}
+    </select>
 
     <!--save user-->
     <insert id="save" parameterType="user" useGeneratedKeys="true" keyProperty="id">
@@ -43,6 +51,21 @@
         </selectKey>
     </insert>
 
+
     <!--update user-->
+    <update id="update" parameterType="user" >
+        update appuser set
+            creationdate = #{creationDate},
+            modificationdate = #{modificationDate},
+            firstname = #{firstname},
+            lastname = #{lastname},
+            password = #{password},
+            address = #{address},
+            phone = #{phone},
+            email = #{email},
+            roles = #{roles}
+        where
+            id = #{id}
+    </update>
 
 </mapper>
