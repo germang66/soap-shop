@@ -3,7 +3,23 @@
             targetNamespace="http://webservices.wsusers.ggp.com"
             xmlns:user="http://webservices.wsusers.ggp.com"
             elementFormDefault="qualified">
-    <xsd:import namespace="http://webservices.wsusers.ggp.com" schemaLocation="UserDetail.xsd"/>
+
+    <xsd:element name="UserDetail" type="UserDetail"/>
+    <xsd:complexType name="UserDetail">
+        <xsd:sequence>
+            <xsd:element name="userhash" type="xsd:string"/>
+            <xsd:element name="creationDate" type="xsd:string"/>
+            <xsd:element name="modificationDate" type="xsd:string"/>
+            <xsd:element name="firstname" type="xsd:string"/>
+            <xsd:element name="lastname" type="xsd:string"/>
+            <xsd:element name="password" type="xsd:string"/>
+            <xsd:element name="address" type="xsd:string"/>
+            <xsd:element name="phone" type="xsd:string"/>
+            <xsd:element name="email" type="xsd:string"/>
+            <xsd:element name="roles" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
     <!--get user by email-->
     <xsd:element name="GetUserByEmailRequest">
         <xsd:complexType>
