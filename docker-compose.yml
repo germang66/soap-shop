@@ -1,14 +1,28 @@
 version: '3'
 
 services:
+  ##
+  ## Oracle Database 
+  ## used by the webservices of users and bills
   oracle-db:
-    build: ./oracle-db/
+    build: 
+      context: ./oracle-db/
+      dockerfile: ./Dockerfile
     ports:
       - "1521:1521"
     volumes:
       - ./oracle-db/data:/opt/oracle/oradata
+  ## 
+  ## Webservice Users
+  ##
   users-ws:
-    build: ./ws-users/
+    build:
+      context: ./ws-users/
+      dockerfile: ./Dockerfile
+      args:
+        - ADMIN_USER=ggp
+        - ADMIN_PASS=ggp123!
+        - WAR_FILE=ws-users.war
     depends_on:
       - oracle-db
     ports:
@@ -17,3 +31,22 @@ services:
       - "8008:8009"
     volumes:
       - ./ws-users/wildfly-logs:/opt/jboss/wildfly/standalone/log
+  ## 
+  ## Webservice Bills
+  ##
+  bills-ws:
+    build: 
+      context: ./ws-bills/
+      dockerfile: ./Dockerfile
+      args:
+        - ADMIN_USER=ggp
+        - ADMIN_PASS=ggp123!
+        - WAR_FILE=ws-bills.war
+    depends_on:
+      - oracle-db
+    ports:
+      - "8082:8080"
+      - "9992:9990"
+      - "8007:8009"
+    volumes:
+      - ./ws-bills/wildfly-logs:/opt/jboss/wildfly/standalone/log

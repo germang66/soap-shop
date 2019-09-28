@@ -1,0 +1,2 @@
+#ignore sql folder when context is send when docker build container
+data/
