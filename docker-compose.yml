@@ -12,6 +12,20 @@ services:
       - "1521:1521"
     volumes:
       - ./oracle-db/data:/opt/oracle/oradata
+  ##
+  ## Postgres Database 
+  ## used by the microservice of products
+  ## require `docker volume create psql-db-volume`
+  bna-db:
+    image: postgres:10.8-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'gp1234!'
+      POSTGRES_DB: 'products'
+    volumes:
+      - psql-db-volume:/var/lib/postgresql/data
   ## 
   ## Webservice Users
   ##
