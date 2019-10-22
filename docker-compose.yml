@@ -16,7 +16,7 @@ services:
   ## Postgres Database 
   ## used by the microservice of products
   ## require `docker volume create psql-db-volume`
-  bna-db:
+  psql-db:
     image: postgres:10.8-alpine
     ports:
       - "5432:5432"
@@ -64,3 +64,6 @@ services:
       - "8007:8009"
     volumes:
       - ./ws-bills/wildfly-logs:/opt/jboss/wildfly/standalone/log
+    
+volumes:
+  psql-db-volume:
