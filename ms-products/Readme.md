@@ -7,6 +7,11 @@ Description
     * Edit product
     * Remove product
     * List product
+    * Add catalog
+    * Edit catalog
+    * Remove catalog
+    * List catalog
+       
 
 Stack
 ========
@@ -15,4 +20,6 @@ Stack
 * SpringBoot2
     * Spring Data REST
 * PostgreSQL10
+
+
 
